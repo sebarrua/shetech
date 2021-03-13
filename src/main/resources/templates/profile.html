@@ -1,6 +1,6 @@
 <!DOCTYPE html>
     <html lang="es" class=" js csstransitions desktop portrait csstransforms csstransforms3d">
-    <head>
+	<head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,71 +40,101 @@
 						<li class="nav-item"><a class="nav-link" href="register.html">Registrarse</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-                        <li><a class="hover-btn-new log" href="login.html"><span>Entrar</span></a></li>
+                        <li><a class="hover-btn-new log" href="login.html"><span>Perfil</span></a></li>
                     </ul>
 				</div>
 			</div>
 		</nav>
 	</header>
 	
-    <div id="carouselExampleControls" class="carousel slide bs-slider box-slider">
-        <div id="home" class="first-section" style="background-image:url(&#39;static/images/working.jpeg&#39;);">
-            <div class="dtab">
+	<hr>
+<div class="container">
+    <div class="row">
+  		<div class="col-sm-3">
+      <div class="text-center">
+        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+        <h6>cambiar foto...</h6>
+        <input type="file" class="text-center center-block file-upload">
+      </div><br>
+
                
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6 pb-5">
-                        <form action="" method="post">
-                            <div class="card border-primary rounded-1">
-                                <div class="card-header p-0">
-                                    <div class="bg-info text-white text-center py-2">
-                                        <h3><i class="fa fa-envelope"></i> Contactanos</h3>
-                                        <p class="m-0">Con gusto te vamos a ayudar</p>
-                                    </div>
-                                </div>
-                                <div class="card-body p-3">
-    
-                                    <!--Body-->
-                                    <div class="form-group">
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
-                                            </div>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre y Apellido" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fa fa-envelope text-info"></i></div>
-                                            </div>
-                                            <input type="email" class="form-control" id="email" name="email" placeholder="ejemplo@gmail.com" required>
-                                        </div>
-                                    </div>
-    
-                                    <div class="form-group">
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fa fa-comment text-info"></i></div>
-                                            </div>
-                                            <textarea class="form-control" placeholder="Envianos tu Mensaje" required></textarea>
-                                        </div>
-                                    </div>
-    
-                                    <div class="text-center">
-                                        <input type="submit" value="Enviar" class="btn btn-info btn-block rounded-0 py-2">
-                                    </div>
-                                </div>
-    
+          <div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-link fa-1x"></i> Pagina web</div>
+            <div class="panel-body"><a href="#">www.pagina.com</a></div>
+          </div>
+          
+          
+        </div><!--/col-3-->
+    	<div class="col-sm-9">
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="home">
+                <hr>
+                  <form class="form" action="##" method="post" id="registrationForm">
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>Nombre</h4></label>
+                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Ingrese su nombre">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                            <label for="last_name"><h4>Apellido</h4></label>
+                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Ingrese su apellido">
+                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="phone"><h4>Telefono</h4></label>
+                              <input type="text" class="form-control" name="phone" id="phone" placeholder="Ingrese su telefono">
+                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                             <label for="mobile"><h4>Telefono</h4></label>
+                              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Ingrese su telefono">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="email"><h4>Email</h4></label>
+                              <input type="email" class="form-control" name="email" id="email" placeholder="Ingrese su email">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="password"><h4>Contraseña</h4></label>
+                              <input type="password" class="form-control" name="password" id="password" placeholder="Ingresa su contraseña">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                            <label for="password2"><h4>Verifica contraseña</h4></label>
+                              <input type="password" class="form-control" name="password2" id="password2" placeholder="Vuelve a escribir tu contraseña">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+                              	<button class="btn btn-lg btn-primary" type="submit"><i class="glyphicon glyphicon-ok-sign"></i>Guardar</button>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            </div>
+                      </div>
+              	</form>
+			</div>
+              </div>
+          </div>
+
         </div>
     </div>
-
+                                                      
     <footer class="footer">
         <div class="container">
             <div class="row">
@@ -127,7 +157,7 @@
                             <li><a href="index.html#">Inicio</a></li>
                             <li><a href="index.html#">Blog</a></li>
 							<li><a href="index.html#">Nosotros</a></li>
-							<li><a href="contact.html">Contacto</a></li>
+							<li><a href="index.html#">Contacto</a></li>
                         </ul>
                     </div>
                 </div>
@@ -169,8 +199,6 @@
             </div>
         </div>
     </div>
-
-    <a href="index.html" id="scroll-to-top" class="dmtop global-radius" style="bottom: -100px;"><i class="fa fa-angle-up"></i></a>
 
     <script src="./static/js/all.js"></script>
     <script src="./static/js/custom.js"></script>

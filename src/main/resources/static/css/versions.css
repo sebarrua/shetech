@@ -67,7 +67,7 @@ body.host_version .grd1:hover,
 body.host_version .grd1:focus {
     background-position: 100px;
     color: #ffffff !important;
-    background: #9dc15b;
+    background: #008DE8;
 }
 
 body.host_version .checkdomain {
@@ -91,16 +91,17 @@ body.host_version .nav-pills > li:focus > a{
 body.host_version .nav-pills > li > a.active,
 body.host_version .nav-pills > li > a.active:focus,
 body.host_version .nav-pills > li > a.active:hover{
-	background: #9dc15b;
+	background: #008DE8;
 	color: #ffffff;
 }
 
 
 body.host_version .checkdomain-wrapper .form-group {
-    background: #9dc15b;
+    background: #008DE8;
     padding: 10px;
     border: 1px solid #e9e9ec;
     width: 100%;
+    border-radius: 15px;
 }
 
 body.host_version .checkdomain hr {
@@ -134,9 +135,8 @@ body.host_version .checkdomain-wrapper .checkbox {
     padding-left: 5px;
     text-align: left;
 	width: 10%;
-	float: left;
 	position: relative;
-	background: #9dc15b;
+	background: #008DE8;
 }
 
 .checkbox-warning label{
@@ -170,7 +170,7 @@ body.host_version .footer-social .btn {
     width: 40px;
 }
 body.host_version .footer-social .btn:hover {
-	background: #9dc15b;
+	background: #008DE8;
 	color: #ffffff;
 	border: 1px solid #ffffff;
 }
@@ -219,7 +219,7 @@ body.host_version .header_style_01 {
 }
 
 body.host_version .effect-1:after {
-    box-shadow: 0 0 0 2px #9dc15b;
+    box-shadow: 0 0 0 2px #008DE8;
 }
 
 body.host_version .first-section .effect-1:after,

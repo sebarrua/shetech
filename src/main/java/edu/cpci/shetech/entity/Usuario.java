@@ -3,9 +3,11 @@ package edu.cpci.shetech.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name="usuario")
 public class Usuario {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id")
 	private Long usuarioId;
 	
@@ -17,6 +19,9 @@ public class Usuario {
 	
 	@Column(name="password")
 	private String password;
+	
+	@Column(name="is_activo")
+	private boolean isActivo;
 	
 	public Usuario() {
 		
@@ -53,6 +58,16 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public boolean isActivo() {
+		return isActivo;
+	}
+
+	public void setActivo(boolean isActivo) {
+		this.isActivo = isActivo;
+	}
+	
+	
 	
 
 }

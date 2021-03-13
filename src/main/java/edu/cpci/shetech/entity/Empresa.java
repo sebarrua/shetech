@@ -3,9 +3,11 @@ package edu.cpci.shetech.entity;
 import javax.persistence.*;
 
 @Entity
+@Table (name="empresa")
 public class Empresa {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id")
 	private Long empresaId;
 	
