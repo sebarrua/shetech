@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-    <html lang="es" class=" js csstransitions desktop portrait csstransforms csstransforms3d">
+    <html xmlns:th="http://www.thymeleaf.org" lang="es" class=" js csstransitions desktop portrait csstransforms csstransforms3d">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="./static/images/hand-shake.png" >
-        <link rel="stylesheet" href="./static/css/bootstrap.min.css">
-        <link rel="stylesheet" href="./static/style.css">
-        <link rel="stylesheet" href="./static/css/versions.css">
-        <link rel="stylesheet" href="./static/css/responsive.css">
-        <link rel="stylesheet" href="./static/css/font-awesome.min.css">
-        <script src="./static/js/modernizer.js"></script>
-        <link href="./static/css/blog-post.css" rel="stylesheet">
+        <link rel="icon" href="/images/hand-shake.png" >
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="/css/versions.css">
+        <link rel="stylesheet" href="/css/responsive.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <script src="/js/modernizer.js"></script>
+        <link href="/css/blog-post.css" rel="stylesheet">
         <title>She Tech</title>  
     </head>
 <body class="host_version" cz-shortcut-listen="true"> 
@@ -23,30 +23,7 @@
 		</div>
 	</div>
 	
-	<header class="top-navbar">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="index.html">
-					<img src="./static/images/logo.png" alt="She Tech logo" class="responsive">
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbars-host">
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="posts.html">Posteos</a></li>
-						<li class="nav-item"><a class="nav-link" href="register.html">Registrarse</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-                        <li><a class="hover-btn-new log" href="login.html"><span>Entrar</span></a></li>
-                    </ul>
-				</div>
-			</div>
-		</nav>
-	</header>
+	<th:block th:include="/_header"></th:block>
 	
   <div class="container">
 
@@ -198,50 +175,7 @@
 
   </div>
 	
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Sobre nosotros</h3>
-                        </div>
-                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
-                        <p>Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
-                    </div>
-                </div>
-
-				<div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Información</h3>
-                        </div>
-                        <ul class="footer-links">
-                            <li><a href="index.html#">Inicio</a></li>
-                            <li><a href="index.html#">Blog</a></li>
-							<li><a href="index.html#">Nosotros</a></li>
-							<li><a href="contact.html">Contacto</a></li>
-                        </ul>
-                    </div>
-                </div>
-				
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Detalles de contacto</h3>
-                        </div>
-
-                        <ul class="footer-links">
-                            <li><a href="mailto:#">info@tupagina.com</a></li>
-                            <li><a href="index.html#">www.tupagina.com</a></li>
-                            <li>Av. Siempreviva 5555</li>
-                            <li>+54 3764 112233</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+  <th:block th:include="/_footer"></th:block>
 
     <div class="copyrights">
         <div class="container">
@@ -265,11 +199,11 @@
 
     <a href="index.html" id="scroll-to-top" class="dmtop global-radius" style="bottom: -100px;"><i class="fa fa-angle-up"></i></a>
 
-    <script src="./static/js/all.js"></script>
-    <script src="./static/js/custom.js"></script>
-	<script src="./static/js/timeline.min.js"></script>
-    <script src="./static/jquery/jquery.min.js"></script>
-    <script src="./static/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/all.js"></script>
+    <script src="/js/custom.js"></script>
+	<script src="/js/timeline.min.js"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
 	<script>
 		timeline(document.querySelectorAll('.timeline'), {
 			forceVerticalMode: 700,

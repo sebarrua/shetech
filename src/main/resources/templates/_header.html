@@ -13,10 +13,12 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a class="nav-link" th:href="@{/homePage}">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link"  th:href="@{/posteo}">Posteos</a></li>
-                    <li class="nav-item"><a class="nav-link"  th:href="@{/registrarse}">Registrarse</a></li>
+                    <li th:hidden="${userLog} ? true" class="nav-item"><a class="nav-link"  th:href="@{/register}">Registrarse</a></li>
+                    
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="hover-btn-new log" th:href="@{/login}"><span>Entrar</span></a></li>
+                    <li th:hidden="${userLog} ? true"><a class="hover-btn-new log" th:href="@{/login}"><span>Entrar</span></a></li>
+                    <li th:hidden="${userNoLog} ? true"><a class="hover-btn-new log" th:href="@{/j_spring_security_logout}"><span>Salir</span></a></li>
                 </ul>
             </div>
         </div>

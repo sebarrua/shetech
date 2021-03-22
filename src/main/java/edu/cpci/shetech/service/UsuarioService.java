@@ -5,8 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -15,22 +17,45 @@ import edu.cpci.shetech.repository.UsuarioRepository;
 
 
 
+@Transactional
 @Service
 public class UsuarioService implements _BaseService<Usuario> {
 	
 	
 	@Autowired
     private EntityManager entityManager;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private RolUsuarioService rolUsuarioService;
+	
+	public String AddUser(Usuario usuario) {
+		String mensaje="";
+		try {
+		Usuario newUser = new Usuario();
+		newUser.setUsername(usuario.getUsername());
+		newUser.setEmail(usuario.getEmail());
+		newUser.setActivo(true);
+		newUser.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		this.repositorioUsuario.save(newUser);
+		this.rolUsuarioService.setRolUser(newUser);
+		mensaje="Usuario "+usuario.getUsername()+" agregado.";
+		return mensaje;
+		}catch(Exception e){
+			mensaje="Error al agregar usuario.";
+			return mensaje;
+		}
+	}
     
     public Usuario getUsuarioByNombre(String nombre){
         try{
         	String sql = "Select e from " + Usuario.class.getName() + " e"
-                    + " where e.nombre = :nombre and e.id = 1";
+                    + " where e.username = :nombre";
 
             Query query = entityManager.createQuery(sql, Usuario.class);
 
             query.setParameter("nombre",nombre);
-            System.out.println("Nombre de usuario logueado: "+((Usuario) query.getSingleResult()).getNombre());
+            System.out.println("Nombre de usuario logueado: "+((Usuario) query.getSingleResult()).getUsername());
 
             return (Usuario) query.getSingleResult();
         }catch (NoResultException e){
@@ -44,13 +69,13 @@ public class UsuarioService implements _BaseService<Usuario> {
     public Usuario getUsuarioByNombre1(String nombre){
         try{
             String sql = "Select e from " + Usuario.class.getName() + " e"
-                    + " where e.nombre = :nombre and e.id = 1";
+                    + " where e.username = :nombre";
 
             Query query = entityManager.createQuery(sql, Usuario.class);
             Usuario usuario = (Usuario) query.getSingleResult();
            
             query.setParameter("nombre",nombre);
-            System.out.println(((Usuario) query.getSingleResult()).getNombre()+" Class: userservice");
+            System.out.println(((Usuario) query.getSingleResult()).getUsername()+" Class: userservice");
             this.entityManager.close();
             return usuario;
            
@@ -65,20 +90,20 @@ public class UsuarioService implements _BaseService<Usuario> {
 	@Override
 	public List<Usuario> getAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.repositorioUsuario.findAll();
 	}
 
 	@Override
 	public Usuario getOneById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.repositorioUsuario.getOne(id);
 	}
 
 
 
 	@Override
 	public void save(Usuario entidad) {
-		// TODO Auto-generated method stub
+		this.repositorioUsuario.save(entidad);
 		
 	}
 
@@ -89,5 +114,4 @@ public class UsuarioService implements _BaseService<Usuario> {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

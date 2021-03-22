@@ -11,8 +11,8 @@ public class Usuario {
 	@Column(name="id")
 	private Long usuarioId;
 	
-	@Column(name="nombre")
-	private String nombre;
+	@Column(name="username")
+	private String username;
 	
 	@Column(name="email")
 	private String email;
@@ -35,12 +35,12 @@ public class Usuario {
 		this.usuarioId = usuarioId;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getEmail() {

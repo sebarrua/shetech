@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-    <html lang="es" class=" js csstransitions desktop portrait csstransforms csstransforms3d">
+    <html xmlns:th="http://www.thymeleaf.org" lang="es" class=" js csstransitions desktop portrait csstransforms csstransforms3d">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">   
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="./static/images/hand-shake.png" >
-        <link rel="stylesheet" href="./static/css/bootstrap.min.css">
-        <link rel="stylesheet" href="./static/style.css">
-        <link rel="stylesheet" href="./static/css/versions.css">
-        <link rel="stylesheet" href="./static/css/responsive.css">
-        <link rel="stylesheet" href="./static/css/font-awesome.min.css">
-        <script src="./static/js/modernizer.js"></script>
+        <link rel="icon" href="/images/hand-shake.png" >
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="/css/versions.css">
+        <link rel="stylesheet" href="/css/responsive.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <script src="/js/modernizer.js"></script>
         <title>Registrarse en She Tech</title>  
     </head>
 <body class="host_version" cz-shortcut-listen="true"> 
@@ -22,30 +22,7 @@
 		</div>
 	</div>
 	
-	<header class="top-navbar">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="index.html">
-					<img src="./static/images/logo.png" alt="She Tech logo" class="responsive">
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbars-host">
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Posteos</a></li>
-						<li class="nav-item active"><a class="nav-link" href="index.html">Registrarse</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-                        <li><a class="hover-btn-new log" href="login.html"><span>Entrar</span></a></li>
-                    </ul>
-				</div>
-			</div>
-		</nav>
-	</header>
+	<th:block th:include="/_header"></th:block>
 
 	<div id="carouselExampleControls" class="carousel slide bs-slider box-slider">
         <div id="home" class="first-section" style="background-image:url(&#39;static/images/working.jpeg&#39;);">
@@ -60,13 +37,13 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading"><h3 class="panel-title"><strong>Bienvenida a She Tech </strong></h3></div>
                                         <div class="panel-body">
-                                        <form class="form-horizontal" method="post" action="#">
+                                        <form class="form-horizontal" th:action="@{/registerSave}" th:object="${Usuario}" method="post" >
         
                                             <div class="form-group">
                                                 <label for="name" class="cols-sm-2 control-label">Nombre</label>
                                                 <div class="cols-sm-10">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="name" id="name" placeholder="Ingrese nombre" />
+                                                        <input type="text" th:field="*{username}" class="form-control" name="name" id="name" placeholder="Ingrese nombre" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -74,26 +51,7 @@
                                                 <label for="email" class="cols-sm-2 control-label">Email</label>
                                                 <div class="cols-sm-10">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="email" id="email" placeholder="Ingrese Email" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="business" class="cols-sm-2 control-label">Seleccione empresa/empleador a la que pertenece/perteneció</label>
-                                                <div class="cols-sm-10">
-                                                    <div class="input-group">
-                                                        <select id="business" name="business" class="form-control">
-                                                            <option value="google">Google</option>
-                                                            <option value="facebook">Facebook</option>
-                                                          </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="business" class="cols-sm-2 control-label">Si no esta en la lista anterior indiquelo aqui o dejelo en blanco</label>
-                                                <div class="cols-sm-10">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" name="business" id="business-other" placeholder="Ingrese empresa/empleador" />
+                                                        <input type="email" th:field="*{email}" class="form-control" name="email" id="email" placeholder="Ingrese Email" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -101,7 +59,7 @@
                                                 <label for="password" class="cols-sm-2 control-label">Contraseña</label>
                                                 <div class="cols-sm-10">
                                                     <div class="input-group">
-                                                        <input type="password" class="form-control" name="password" id="password" placeholder="Ingrese su contraseña" />
+                                                        <input type="password" th:field="*{password}" class="form-control" name="password" id="password" placeholder="Ingrese su contraseña" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -109,12 +67,12 @@
                                                 <label for="confirm" class="cols-sm-2 control-label">Confirme contraseña</label>
                                                 <div class="cols-sm-10">
                                                     <div class="input-group">
-                                                        <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirme su contraseña" />
+                                                        <input type="password" name="passwordRepeat" class="form-control" id="confirm" placeholder="Confirme su contraseña" />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group ">
-                                                <button type="button" class="btn btn-primary btn-lg btn-block login-button">Registrarse</button>
+                                                <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Registrarse</button>
                                             </div>
                                         </form>
                                     </div>
@@ -132,50 +90,7 @@
 </div>
 </div>
 	
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Sobre nosotros</h3>
-                        </div>
-                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
-                        <p>Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
-                    </div>
-                </div>
-
-				<div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Información</h3>
-                        </div>
-                        <ul class="footer-links">
-                            <li><a href="index.html#">Inicio</a></li>
-                            <li><a href="index.html#">Blog</a></li>
-							<li><a href="index.html#">Nosotros</a></li>
-							<li><a href="index.html#">Contacto</a></li>
-                        </ul>
-                    </div>
-                </div>
-				
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Detalles de contacto</h3>
-                        </div>
-
-                        <ul class="footer-links">
-                            <li><a href="mailto:#">info@tupagina.com</a></li>
-                            <li><a href="index.html#">www.tupagina.com</a></li>
-                            <li>Av. Siempreviva 5555</li>
-                            <li>+54 3764 112233</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+<th:block th:include="/_footer"></th:block>
 
     <div class="copyrights">
         <div class="container">
@@ -199,9 +114,9 @@
 
     <a href="index.html" id="scroll-to-top" class="dmtop global-radius" style="bottom: -100px;"><i class="fa fa-angle-up"></i></a>
 
-    <script src="./static/js/all.js"></script>
-    <script src="./static/js/custom.js"></script>
-	<script src="./static/js/timeline.min.js"></script>
+    <script src="/js/all.js"></script>
+    <script src="/js/custom.js"></script>
+	<script src="/js/timeline.min.js"></script>
 	<script>
 		timeline(document.querySelectorAll('.timeline'), {
 			forceVerticalMode: 700,

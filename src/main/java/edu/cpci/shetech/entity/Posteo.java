@@ -30,6 +30,61 @@ public class Posteo {
     @JoinColumn(name = "id_empresa", nullable = false)
 	private Empresa empresa ;
 	
+	public Posteo() {
+		
+	}
+
+	public Long getPosteoId() {
+		return posteoId;
+	}
+
+	public void setPosteoId(Long posteoId) {
+		this.posteoId = posteoId;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Date getFechaPosteo() {
+		return fechaPosteo;
+	}
+
+	public void setFechaPosteo(Date fechaPosteo) {
+		this.fechaPosteo = fechaPosteo;
+	}
+
+	public String getTexto() {
+		return texto;
+	}
+
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+	
+	
+	
+	
 	
 
 }
