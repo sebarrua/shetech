@@ -52,7 +52,7 @@ public class UsuarioController {
 								mensaje="Contraseña incorrecta";
 							}
 						}else {
-							mensaje="Repetir contraseña requerido.";
+							mensaje="Repetir contraseña.";
 						}
 					}else {
 						mensaje="Contraseña requerido";
