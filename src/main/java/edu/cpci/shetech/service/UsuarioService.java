@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import edu.cpci.shetech.entity.Usuario;
@@ -21,7 +20,8 @@ import edu.cpci.shetech.repository.UsuarioRepository;
 @Service
 public class UsuarioService implements _BaseService<Usuario> {
 	
-	
+    @Autowired
+    private UsuarioRepository repositorioUsuario;
 	@Autowired
     private EntityManager entityManager;
 	@Autowired
@@ -29,6 +29,12 @@ public class UsuarioService implements _BaseService<Usuario> {
 	@Autowired
 	private RolUsuarioService rolUsuarioService;
 	
+	
+	/**
+	 * Agrega un usuario
+	 * @param usuario
+	 * @return
+	 */
 	public String AddUser(Usuario usuario) {
 		String mensaje="";
 		try {
@@ -47,6 +53,11 @@ public class UsuarioService implements _BaseService<Usuario> {
 		}
 	}
     
+	/**
+	 * Recupera el nombre del usuario logueado
+	 * @param nombre
+	 * @return
+	 */
     public Usuario getUsuarioByNombre(String nombre){
         try{
         	String sql = "Select e from " + Usuario.class.getName() + " e"
@@ -62,10 +73,13 @@ public class UsuarioService implements _BaseService<Usuario> {
             return null;
         }
     }
-
-
     
-    //Recupera el nombre del usuario logueado
+    
+    /**
+     * Recupera el nombre del usuario logueado
+     * @param nombre
+     * @return
+     */
     public Usuario getUsuarioByNombre1(String nombre){
         try{
             String sql = "Select e from " + Usuario.class.getName() + " e"
@@ -83,9 +97,6 @@ public class UsuarioService implements _BaseService<Usuario> {
             return null;
         }
     }
-    @Autowired
-    private UsuarioRepository repositorioUsuario;
-
 
 	@Override
 	public List<Usuario> getAll() {
@@ -99,15 +110,11 @@ public class UsuarioService implements _BaseService<Usuario> {
 		return this.repositorioUsuario.getOne(id);
 	}
 
-
-
 	@Override
 	public void save(Usuario entidad) {
 		this.repositorioUsuario.save(entidad);
 		
 	}
-
-
 
 	@Override
 	public void delete(Long id) {
