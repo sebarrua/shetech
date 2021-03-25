@@ -38,13 +38,19 @@
                               <div class="form-group row">
                                 <label for="text" class="col-12 col-form-label">Ingresa titulo</label> 
                                 <div class="col-12">
-                                  <input th:field="*{nombre}" id="text" name="text" placeholder="Ingresa un titulo" class="form-control here" required="required" type="text">
+                                  <input th:field="*{titulo}" placeholder="Ingresa un titulo" class="form-control here" required="required" type="text">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="text" class="col-12 col-form-label">Ingresa titulo</label> 
+                                <div class="col-12">
+                                  <input th:field="*{descripcion}" placeholder="Ingresa un titulo" class="form-control here" required="required" type="text">
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="textarea" class="col-12 col-form-label">Cuerpo</label> 
                                 <div class="col-12">
-                                  <textarea th:field="*{texto}"id="textarea" name="textarea" cols="40" rows="5" class="form-control"></textarea>
+                                  <textarea th:field="*{texto}" cols="40" rows="5" class="form-control"></textarea>
                                 </div>
                               </div>
                               <div class="form-group row">

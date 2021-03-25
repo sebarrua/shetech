@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.cpci.shetech.entity.Usuario;
 import edu.cpci.shetech.service.UsuarioService;
+import edu.cpci.shetech.utils.VistaUtils;
 
 @Controller
-public class HomeController {
+public class HomeController { 
+	
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private VistaUtils vistaUtils;
 
 	
 	
@@ -23,44 +27,23 @@ public class HomeController {
 	public String HomePage (Model model, Principal principal) {
 		System.out.println("HOMEPAGE CONTROLLER");
 		
-		if(principal!=null) {
-			System.out.println("USUARIO LOGUEADO: "+principal.getName());
-			Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
-			model.addAttribute("userLog", userLog.getUsername());
-		}else {
-			System.out.println("NO HAY PRINCIPAL");
-			model.addAttribute("userNoLog", "noUser");
-		}
+		this.vistaUtils.setHeader(principal, model);
 		return "homePage.html";
 	}
 	
 	@RequestMapping(value = ("/login"), method = RequestMethod.GET)
     public String loginPage(Model model, Principal principal) {
 		System.out.println("LOGUIN CONTROLLER");
-		if(principal!=null) {
-			System.out.println("USUARIO LOGUEADO: "+principal.getName());
-			Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
-			model.addAttribute("userLog", userLog.getUsername());
-		}else {
-			System.out.println("NO HAY PRINCIPAL");
-			model.addAttribute("userNoLog", "noUser");
-		}
+		this.vistaUtils.setHeader(principal, model);
         return "login.html";
     }
 	
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public String accessDenied(Model model,Principal principal) {
-		String message = "No posee permisos suficientes para acceder a esta página!";
+		String message = "¡Lo sentimos! No posee permisos suficientes para acceder a esta página.";
 		model.addAttribute("message", message);
-		if(principal!=null) {
-			System.out.println("USUARIO LOGUEADO: "+principal.getName());
-			Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
-			model.addAttribute("userLog", userLog.getUsername());
-		}else {
-			System.out.println("NO HAY PRINCIPAL");
-			model.addAttribute("userNoLog", "noUser");
-		}
-		return "403page";
+		this.vistaUtils.setHeader(principal, model);
+		return "403";
 	}
 	
 }

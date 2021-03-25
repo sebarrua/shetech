@@ -13,8 +13,11 @@ public class Posteo {
 	@Column(name="id")
 	private Long posteoId;
 	
-	@Column(name="nombre")
-	private String nombre;
+	@Column(name="titulo")
+	private String titulo;
+	
+	@Column(name="descripcion")
+	private String descripcion;
 	
 	@Column(name="fecha_posteo")
 	private Date fechaPosteo;
@@ -30,6 +33,10 @@ public class Posteo {
     @JoinColumn(name = "id_empresa", nullable = false)
 	private Empresa empresa ;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_parametro", nullable = false)
+	private Parametro estado ;
+	
 	public Posteo() {
 		
 	}
@@ -42,12 +49,20 @@ public class Posteo {
 		this.posteoId = posteoId;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public Date getFechaPosteo() {
@@ -81,10 +96,14 @@ public class Posteo {
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
-	
-	
-	
-	
-	
 
+	public Parametro getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Parametro estado) {
+		this.estado = estado;
+	}
+
+	
 }

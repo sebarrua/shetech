@@ -11,8 +11,17 @@
         <link rel="stylesheet" href="css/responsive.css">
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+            integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
         <script src="js/modernizer.js"></script>
-        <title>She Tech | Posteos</title>  
+        <title>She Tech | Posteos</title>
+        <style>
+            .col{
+                padding-right: 0px;
+                padding-left: 0px;
+            }
+        </style>
     </head>
 <body class="host_version" cz-shortcut-listen="true"> 
 	<div id="preloader" style="display: none;">
@@ -32,8 +41,9 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Texto</th>
+                        <th>Título</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
                         <th>Empresa</th>
                         <th>Fecha</th>
                         <th>Usuario</th>
@@ -43,29 +53,44 @@
                 <tbody>
                     <tr th:each="posteos : ${listPosteo}">
                         <td th:text="${posteos.getPosteoId()}"></td>
-                        <td th:text="${posteos.getNombre()}"></td>
-                        <td th:text="${posteos.getTexto()}"></td>
+                        <td th:text="${posteos.getTitulo()}"></td>
+                        <td th:text="${posteos.getDescripcion()}"></td>
+                        <td th:text="${posteos.getEstado()?.getDescripcion()}"></td>
                         <td th:text="${posteos.getEmpresa().getNombre()}"></td>
                         <td th:text="${posteos.getFechaPosteo()}"></td>
                         <td th:text="${posteos.getUsuario().getUsername()}"></td>
                         <td>
-                            <form>
-                                <button>Eliminar</button>
-                            </form>
-                            <form>
-                                <button>Editar</button>
-                            </form>
-                            <form>
-                                <button>Calificar</button>
-                            </form>
+                            <div class="row">
+                            <div class="col">
+                                <form th:action="@{/editarPosteo/{posteoId}(posteoId = ${posteos.getPosteoId()})}" method="GET">
+                                    <button><i class="fas fa-edit"></i></i></button>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <form th:action="@{/deletePosteo/{posteoId}(posteoId = ${posteos.getPosteoId()})}" method="GET">
+                                    <button type="submit"  ><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <form th:action="@{/aprobarPosteo/{posteoId}(posteoId = ${posteos.getPosteoId()})}" method="GET">
+                                    <button></i><i class="fas fa-check"></i></button>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <form th:action="@{/bloquearPosteo/{posteoId}(posteoId = ${posteos.getPosteoId()})}" method="GET">
+                                    <button><i class="fas fa-times"></i></button>
+                                </form>
+                            </div>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
                 <tfooter>
                     <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Texto</th>
+                        <th>Título</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
                         <th>Empresa</th>
                         <th>Fecha</th>
                         <th>Usuario</th>

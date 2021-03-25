@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org" lang="es" class=" js csstransitions desktop portrait csstransforms csstransforms3d">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="/images/hand-shake.png" >
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="/css/versions.css">
+        <link rel="stylesheet" href="/css/responsive.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <script src="/js/modernizer.js"></script>
+        <title>She Tech</title>  
+    </head>
+<body class="host_version" cz-shortcut-listen="true"> 
+	<div id="preloader" style="display: none;">
+		<div class="loader-container done">
+			<div class="progress-br float shadow done">
+				<div class="progress__item"></div>
+			</div>
+		</div>
+	</div>
+	
+	<th:block th:include="/_header"></th:block>
+	
+	<div id="carouselExampleControls" class="carousel slide bs-slider box-slider">
+				<div id="home" class="first-section" style="background-image:url(&#39;static/images/working.jpeg&#39;);">
+					<div class="dtab">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 col-sm-12 text-center">
+									<div class="big-tagline">
+										<h2><strong>403</strong></h2>
+										<p th:text="${message}" class="lead">¡Lo sentimos! Hubo un error... </p>
+									</div>
+								</div>
+							</div>          
+						</div>
+					</div>
+				</div>
+	</div>
+	
+    <th:block th:include="/_footer"></th:block>
+
+    <div class="copyrights">
+        <div class="container">
+            <div class="footer-distributed">
+                <div class="footer-left">                   
+                    <p class="footer-company-name">Curso el Desarrollador multiplataforma certificado </p>
+                </div>
+
+                <div class="footer-right">
+                    <ul class="footer-links-soi">
+						<li><a href="index.html#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="index.html#"><i class="fa fa-github"></i></a></li>
+						<li><a href="index.html#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="index.html#"><i class="fa fa-dribbble"></i></a></li>
+						<li><a href="index.html#"><i class="fa fa-pinterest"></i></a></li>
+					</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="index.html" id="scroll-to-top" class="dmtop global-radius" style="bottom: -100px;"><i class="fa fa-angle-up"></i></a>
+
+    <script src="/js/all.js"></script>
+    <script src="/js/custom.js"></script>
+	<script src="/js/timeline.min.js"></script>
+	<script>
+		timeline(document.querySelectorAll('.timeline'), {
+			forceVerticalMode: 700,
+			mode: 'horizontal',
+			verticalStartPosition: 'left',
+			visibleItems: 4
+		});
+	</script>
+</body>
+</html>

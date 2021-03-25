@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.cpci.shetech.entity.Usuario;
 import edu.cpci.shetech.service.UsuarioService;
+import edu.cpci.shetech.utils.VistaUtils;
 
 @Controller
 //@RequestMapping(value="/usuario")
@@ -21,6 +22,8 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private VistaUtils vistaUtils;
 	
 	@GetMapping(value = ("/miPerfil"))
 	public String MiPrefil (@ModelAttribute ("Usuario") Usuario usuario, Model model, Principal principal) {
@@ -64,41 +67,27 @@ public class UsuarioController {
 				mensaje="Nombre de usuario requerido";
 			}
 			model.addAttribute("mensaje", mensaje);
-			if(principal!=null) {
-				System.out.println("USUARIO LOGUEADO: "+principal.getName());
-				Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
-				model.addAttribute("userLog", userLog.getUsername());
-			}else {
-				System.out.println("NO HAY PRINCIPAL");
-				model.addAttribute("userNoLog", "noUser");
-			}
+			this.vistaUtils.setHeader(principal, model);
 			return "redirect:/register";
 		}catch(Exception e){
-			if(principal!=null) {
-				System.out.println("USUARIO LOGUEADO: "+principal.getName());
-				Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
-				model.addAttribute("userLog", userLog.getUsername());
-			}else {
-				System.out.println("NO HAY PRINCIPAL");
-				model.addAttribute("userNoLog", "noUser");
-			}
-			return vista;
+			this.vistaUtils.setHeader(principal, model);
+			return "/404";
 		}
 		//return vista;
 	}
+	
+	/**
+	 * LLama a la vista de registro de usuario
+	 * @param usuario
+	 * @param model
+	 * @param principal
+	 * @return
+	 */
 	@RequestMapping(value="/register", method = RequestMethod.GET)
 	public String Register(@ModelAttribute ("Usuario") Usuario usuario, Model model, Principal principal) {
 		String vista="register";
-		//Usuario usuarioAdd = new Usuario();
 		model.addAttribute("Usuario", usuario);
-		if(principal!=null) {
-			System.out.println("USUARIO LOGUEADO: "+principal.getName());
-			Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
-			model.addAttribute("userLog", userLog.getUsername());
-		}else {
-			System.out.println("NO HAY PRINCIPAL");
-			model.addAttribute("userNoLog", "noUser");
-		}
+		this.vistaUtils.setHeader(principal, model);
 		return vista;
 	}
 

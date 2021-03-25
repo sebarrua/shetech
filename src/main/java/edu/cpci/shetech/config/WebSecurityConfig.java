@@ -65,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             	.antMatchers( "/", "/homePage", "/register", "/posteo").permitAll()
                 .antMatchers("/addPosteo").hasAnyAuthority(ROLE_ADMIN, ROLE_USUARIO)
-                .antMatchers("/deletPosteo").hasAnyAuthority(ROLE_ADMIN)
+                .antMatchers("/deletPosteo", "/posteoAdmin").hasAnyAuthority(ROLE_ADMIN)
                 //.antMatchers("/newEmpresa", "/posteo/addPosteo").authenticated()
             .and()
 	            .formLogin()

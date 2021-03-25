@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,6 +18,7 @@ import edu.cpci.shetech.entity.Usuario;
 import edu.cpci.shetech.service.EmpresaService;
 import edu.cpci.shetech.service.PosteoService;
 import edu.cpci.shetech.service.UsuarioService;
+import edu.cpci.shetech.utils.VistaUtils;
 
 @Controller
 @RequestMapping
@@ -28,6 +30,8 @@ public class PosteoController {
 	private EmpresaService empresaService;
 	@Autowired
 	private PosteoService posteoService;
+	@Autowired
+	private VistaUtils vistaUtils;
 
 	
 	@GetMapping(value="/posteo")
@@ -36,18 +40,46 @@ public class PosteoController {
 		return vista;
 	}
 	
+	@GetMapping(value="/editarPosteo/{posteoId}")
+	public String EditarPosteo(@PathVariable ("posteoId") Long posteoId, Model model, Principal principal) {
+		String vista="";
+		System.out.println("VISTA POSTEO CONTROLLER");
+		Posteo posteoSelect=this.posteoService.getOneById(posteoId);
+		vista = AddPosteo(posteoSelect, model, principal);
+		return vista;
+	}
+	
+	@GetMapping(value="/bloquearPosteo/{posteoId}")
+	public String bloquearPosteo(@PathVariable ("posteoId") Long posteoId, Model model, Principal principal) {
+		String vista="redirect:/posteoAdmin";
+		System.out.println("BLOQUEAR POSTEO CONTROLLER");
+		this.posteoService.bloquearPosteo(posteoId);
+		return vista;
+	}
+	
+	@GetMapping(value="/aprobarPosteo/{posteoId}")
+	public String aprobarPosteo(@PathVariable ("posteoId") Long posteoId, Model model, Principal principal) {
+		String vista="redirect:/posteoAdmin";
+		System.out.println("APROBAR POSTEO CONTROLLER");
+		this.posteoService.aprobarPosteo(posteoId);
+		return vista;
+	}
+	
+	@GetMapping(value="/deletePosteo/{posteoId}")
+	public String DeletePosteo(@PathVariable ("posteoId") Long posteoId, Model model, Principal principal) {
+		String vista="redirect:/posteoAdmin";
+		System.out.println("BORRAR POSTEO CONTROLLER "+ posteoId);
+		this.posteoService.delete(posteoId);
+		return vista;
+	}
+	
 	
 	@GetMapping(value="/posteoAdmin")
 	public String PosteosAdmin(Model model, Principal principal) {
-		String vista="posteosPage";
+		String vista="posteosPageAdmin";
 		List<Posteo> listPosteo = this.posteoService.getAll();
-		if(principal!=null) {
-			Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
-			model.addAttribute("userLog", userLog.getUsername());
-		}else {
-			model.addAttribute("userNoLog", "noUser");
-		}
 		model.addAttribute("listPosteo", listPosteo);
+		this.vistaUtils.setHeader(principal, model);
 		return vista;
 	}
 	
@@ -55,24 +87,20 @@ public class PosteoController {
 	public String AddPosteo(@ModelAttribute ("Posteo") Posteo posteo, Model model, Principal principal) {
 		String vista="addPost.html";
 		List<Empresa> listEmpresa = this.empresaService.getAll();
+		model.addAttribute("Posteo", posteo);
 		model.addAttribute("listaEmpresa", listEmpresa);
-		if(principal!=null) {
-			Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
-			model.addAttribute("userLog", userLog.getUsername());
-		}else {
-			model.addAttribute("userNoLog", "noUser");
-		}
+		this.vistaUtils.setHeader(principal, model);
 		return vista;
 	}
 	
 	@SuppressWarnings("unused")
 	@PostMapping(value="/posteoSave")
 	public String PosteoSave(@ModelAttribute ("Posteo") Posteo posteo, Model model, Principal principal) {
-		String vista="addPost.html";
+		String vista="redirect:/posteoAdmin";
 		String mensaje="";
 		Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
-		if(!posteo.getNombre().equals("")) {
-			if(!posteo.getTexto().equals("")) {
+		if(!posteo.getTitulo().equals("")) {
+			if(!posteo.getDescripcion().equals("")) {
 				if(posteo.getEmpresa()!=null) {
 					mensaje=this.posteoService.AddPosteo(posteo, userLog);
 				}else {
@@ -85,11 +113,6 @@ public class PosteoController {
 			mensaje="Nombre de postero requerido";
 		}
 		model.addAttribute("mensaje", mensaje);
-		if(principal!=null) {
-			model.addAttribute("userLog", userLog.getUsername());
-		}else {
-			model.addAttribute("userNoLog", "noUser");
-		}
 		return vista;
 	}
 
