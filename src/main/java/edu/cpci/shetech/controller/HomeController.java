@@ -13,7 +13,8 @@ import edu.cpci.shetech.service.UsuarioService;
 import edu.cpci.shetech.utils.VistaUtils;
 
 @Controller
-public class HomeController {
+public class HomeController { 
+	
 	
 	@Autowired
 	private UsuarioService usuarioService;
