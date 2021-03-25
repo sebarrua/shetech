@@ -1,7 +1,7 @@
 <header class="top-navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand">
                 <img src="images/logo.png" alt="She Tech logo" class="responsive">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,7 +15,7 @@
 
                     <li class="nav-item"><a class="nav-link" th:href="@{/homePage}">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link"  th:href="@{/posteoAdmin}">Admin</a></li>
-                    <li class="nav-item"><a class="nav-link"  th:href="@{/posteo}">Posteos</a></li>
+                    <li class="nav-item"><a class="nav-link"  th:href="@{/posteos}">Opiniones</a></li>
                     <li th:hidden="${userLog} ? true" class="nav-item"><a class="nav-link"  th:href="@{/register}">Registrarse</a></li>
                     
                 </ul>
