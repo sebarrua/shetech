@@ -42,7 +42,7 @@ public class PosteoController {
 	@GetMapping(value="/posteos")
 	public String Posteos(Model model, Principal principal) {
 		String vista="posts";
-		List<Posteo> listPosteo = this.posteoService.getAll();
+		List<Posteo> listPosteo = this.posteoService.getPosteosAprobados();
 		model.addAttribute("listPosteo", listPosteo);
 		this.vistaUtils.setHeader(principal, model);
 		return vista;

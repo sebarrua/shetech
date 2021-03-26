@@ -16,12 +16,16 @@ public class VistaUtils {
 	private UsuarioService usuarioService;
 	
 	public void setHeader(Principal principal, Model model) {
-		
+		String noAdmin="noadmin";
 		if(principal!=null) {
 			Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
+			if(!userLog.getUsername().equals("admin")) {
+				model.addAttribute("isAdmin", noAdmin);
+			}
 			model.addAttribute("userLog", userLog.getUsername());
 			model.addAttribute("username", principal.getName());
 		}else {
+			model.addAttribute("isAdmin", noAdmin);
 			model.addAttribute("userNoLog", "noUser");
 		}
 		

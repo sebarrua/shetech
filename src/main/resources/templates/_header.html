@@ -14,7 +14,7 @@
                 <ul class="navbar-nav ml-auto">
 
                     <li class="nav-item"><a class="nav-link" th:href="@{/homePage}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link"  th:href="@{/posteoAdmin}">Admin</a></li>
+                    <li th:hidden="${isAdmin} ? true" class="nav-item"><a class="nav-link"  th:href="@{/posteoAdmin}">Admin</a></li>
                     <li class="nav-item"><a class="nav-link"  th:href="@{/posteos}">Opiniones</a></li>
                     <li th:hidden="${userLog} ? true" class="nav-item"><a class="nav-link"  th:href="@{/register}">Registrarse</a></li>
                     
