@@ -27,9 +27,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <h1 class="my-4">Opiniones recientes
-          <small></small>
-        </h1>
+        <h1 class="my-4">Opiniones recientes<small ></small></h1>
 
         <div class="card mb-4"  th:each="posteos: ${listPosteo}">
           <div class="card-body">
@@ -37,7 +35,7 @@
             <h3  th:text="'Opinion de la empresa: ' + ${posteos.getEmpresa().getNombre()}" ></h3>
             <h3  th:text="'Por el usuario: ' + ${posteos.getUsuario().getUsername()}" ></h3>
             <p class="card-text"  th:text="${posteos.getDescripcion()}"></p>
-            <a href="/" class="btn btn-primary">Leer mas &rarr;</a>
+            <a th:href="@{/post(id=${posteos.getPosteoId()})}" class="btn btn-primary">Leer mas &rarr;</a>
           </div>
           <div class="card-footer text-muted" th:text="'Fecha de publicación: ' + ${posteos.getFechaPosteo()}">
             <a  th:text="${posteos.getUsuario().getUsername()}"></a>

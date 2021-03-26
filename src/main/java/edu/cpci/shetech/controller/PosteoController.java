@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.cpci.shetech.entity.Empresa;
 import edu.cpci.shetech.entity.Posteo;
@@ -39,6 +40,19 @@ public class PosteoController {
 		String vista="posts";
 		List<Posteo> listPosteo = this.posteoService.getAll();
 		model.addAttribute("listPosteo", listPosteo);
+		this.vistaUtils.setHeader(principal, model);
+		return vista;
+	}
+	
+	@GetMapping(value="/post")
+	public String Post(@RequestParam(value = "id") Long id, Model model, Principal principal) {
+		String vista="post";
+		List<Posteo> listPosteo = this.posteoService.getAll();
+		for(Posteo post: listPosteo) {
+			if(post.getPosteoId() == id) {
+				model.addAttribute("post", post);
+			}
+		}
 		this.vistaUtils.setHeader(principal, model);
 		return vista;
 	}
