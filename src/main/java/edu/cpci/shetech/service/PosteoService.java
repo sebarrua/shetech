@@ -3,6 +3,8 @@ package edu.cpci.shetech.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +14,41 @@ import edu.cpci.shetech.entity.Usuario;
 import edu.cpci.shetech.repository.PosteoRepository;
 
 @Service
+@Transactional
 public class PosteoService implements _BaseService<Posteo> {
 	
 	@Autowired
 	private PosteoRepository posteoRepository;
 	@Autowired
 	private ParametroService parametroService;
+	
+	public Posteo editSave(Posteo posteo) {
+		Posteo posteoSelect = this.getOneById(posteo.getPosteoId());
+		posteoSelect.setTitulo(posteo.getTitulo());
+		posteoSelect.setDescripcion(posteo.getDescripcion());
+		posteoSelect.setTexto(posteo.getTexto());
+		posteoSelect.setEstado(posteo.getEstado());
+		posteoSelect.setEmpresa(posteo.getEmpresa());
+		return posteoSelect;
+	}
+	
+	public List<Posteo> getPosteosByUsuarioAprobados(Usuario usuario){
+		Parametro parametroPostAprobado = this.parametroService.getOneById((long) 2);
+		List<Posteo> listPosteosByUsuarioAprobados = this.posteoRepository.findByUsuarioAndEstado(usuario, parametroPostAprobado);
+		return listPosteosByUsuarioAprobados;
+	}
+	
+	public List<Posteo> getPosteosAprobados(){
+		Parametro parametroPostAprobado = this.parametroService.getOneById((long) 2);
+		List<Posteo> listPosteosAprobados = this.posteoRepository.getPosteosByEstado(parametroPostAprobado);
+		return listPosteosAprobados;
+	}
+	
+	
+	public List<Posteo> getPosteosByUsuario(Usuario usuario){
+		List<Posteo> listPosteosByUsuario = this.posteoRepository.getPosteosByUsuario(usuario);
+		return listPosteosByUsuario;
+	}
 	
 	public void bloquearPosteo(Long posteoId) {
 		Posteo posteoSelect = this.posteoRepository.getOne(posteoId);
@@ -69,4 +100,6 @@ public class PosteoService implements _BaseService<Posteo> {
 	public void delete(Long id) {
 		this.posteoRepository.deleteById(id);
 	}
+
+
 }
