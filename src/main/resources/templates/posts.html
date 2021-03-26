@@ -27,8 +27,8 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <h1 class="my-4">Opiniones recientes<small ></small></h1>
-
+        <h1 class="my-4 d-inline-block">Opiniones recientes</h1>
+		<button type="button" class="btn btn-primary float-right my-4">Crear opinion</button>
         <div class="card mb-4"  th:each="posteos: ${listPosteo}">
           <div class="card-body">
             <h2 class="card-title"  th:text="${posteos.getTitulo()}"></h2>
