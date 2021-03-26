@@ -34,7 +34,12 @@
 		            <hr>
 		            <div class="row">
 		                <div class="col-md-8">
-        		            <form th:action="@{/posteoSave}" th:object="${Posteo}" method="post"> 
+        		            <form th:action="@{/editPosteoSave}" th:object="${Posteo}" method="post"> 
+                                <div class="form-group row">
+                                    <div hidden=true class="col-12">
+                                      <input th:field="*{posteoId}" placeholder="Ingresa un titulo" class="form-control here" required="required" type="text">
+                                    </div>
+                                </div>
                               <div class="form-group row">
                                 <label for="text" class="col-12 col-form-label">Ingresa titulo</label> 
                                 <div class="col-12">
@@ -64,9 +69,19 @@
                                     </select>
                                 </div>
                               </div>
-                              
+                              <div class="form-group row">
+                                <label for="textarea" class="col-12 col-form-label">Estado</label> 
+                                <div class="col-12">
+                                    <select th:field="*{estado}"id="textarea" name="textarea" cols="40" rows="5" class="form-control">
+                                        <option th:each="estado: ${listaEstado}" 
+                                            th:text="${estado.getDescripcion()}"
+                                            th:value="${estado.getParametroId()}">
+                                        </option>
+                                    </select>
+                                </div>
+                              </div>
                               <div class="col-md-7">
-                                <button type="submit" class="btn btn-sm btn-primary">Agregar</button>
+                                <button type="submit" class="btn btn-sm btn-primary">Editar</button>
                             </div> 
                             </form>
         		        </div>

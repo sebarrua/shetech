@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.cpci.shetech.entity.Empresa;
+import edu.cpci.shetech.entity.Parametro;
 import edu.cpci.shetech.entity.Posteo;
 import edu.cpci.shetech.entity.Usuario;
 import edu.cpci.shetech.service.EmpresaService;
+import edu.cpci.shetech.service.ParametroService;
 import edu.cpci.shetech.service.PosteoService;
 import edu.cpci.shetech.service.UsuarioService;
 import edu.cpci.shetech.utils.VistaUtils;
@@ -33,6 +35,8 @@ public class PosteoController {
 	private PosteoService posteoService;
 	@Autowired
 	private VistaUtils vistaUtils;
+	@Autowired
+	private ParametroService parametroService;
 
 	
 	@GetMapping(value="/posteos")
@@ -47,22 +51,43 @@ public class PosteoController {
 	@GetMapping(value="/post")
 	public String Post(@RequestParam(value = "id") Long id, Model model, Principal principal) {
 		String vista="post";
+		Posteo post = this.posteoService.getOneById(id);
+		model.addAttribute("post", post);
+		/**
+		 * 
+		 * 
 		List<Posteo> listPosteo = this.posteoService.getAll();
 		for(Posteo post: listPosteo) {
 			if(post.getPosteoId() == id) {
 				model.addAttribute("post", post);
 			}
 		}
+		 */
 		this.vistaUtils.setHeader(principal, model);
+		return vista;
+	}
+	
+	@PostMapping(value="/editPosteoSave")
+	public String EditPosteoSave(@ModelAttribute ("Posteo") Posteo posteo, Model model, Principal principal) {
+		
+		System.out.println("POSTEO CONTROLLER: editPosteoSave");
+		//Posteo posteoSelect = this.posteoService.getOneById(posteo.getPosteoId());
+		Posteo posteoSelect=this.posteoService.editSave(posteo);
+		String vista ="redirect:/editarPosteo/"+posteo.getPosteoId();
 		return vista;
 	}
 	
 	@GetMapping(value="/editarPosteo/{posteoId}")
 	public String EditarPosteo(@PathVariable ("posteoId") Long posteoId, Model model, Principal principal) {
-		String vista="";
+		String vista="editPost";
 		System.out.println("VISTA POSTEO CONTROLLER");
 		Posteo posteoSelect=this.posteoService.getOneById(posteoId);
-		vista = AddPosteo(posteoSelect, model, principal);
+		List<Parametro> listParametroEstadosPosteo=this.parametroService.getParametrosEstadoPosteo();
+		List<Empresa> listEmpresa =this.empresaService.getAll();
+		model.addAttribute("listaEstado", listParametroEstadosPosteo);
+		model.addAttribute("Posteo", posteoSelect);
+		model.addAttribute("listaEmpresa", listEmpresa);
+		this.vistaUtils.setHeader(principal, model);
 		return vista;
 	}
 	
@@ -95,6 +120,14 @@ public class PosteoController {
 	public String PosteosAdmin(Model model, Principal principal) {
 		String vista="posteosPageAdmin";
 		List<Posteo> listPosteo = this.posteoService.getAll();
+		Usuario usuario = this.usuarioService.getOneById((long) 3);
+		List<Posteo> listPosteoByUsuario = this.posteoService.getPosteosByUsuario(usuario);
+		List<Posteo> listPosteoByUsuarioAprobados = this.posteoService.getPosteosByUsuarioAprobados(usuario);
+		System.out.println("listPosteoByUsuarioAprobados: "+listPosteoByUsuarioAprobados.size());
+		for(Posteo p: listPosteoByUsuarioAprobados) {
+			System.out.println(p.getPosteoId());
+		}
+		List<Posteo> listPosteoAprobados = this.posteoService.getPosteosAprobados();
 		model.addAttribute("listPosteo", listPosteo);
 		this.vistaUtils.setHeader(principal, model);
 		return vista;
@@ -110,7 +143,6 @@ public class PosteoController {
 		return vista;
 	}
 	
-	@SuppressWarnings("unused")
 	@PostMapping(value="/posteoSave")
 	public String PosteoSave(@ModelAttribute ("Posteo") Posteo posteo, Model model, Principal principal) {
 		String vista="redirect:/posteoAdmin";
