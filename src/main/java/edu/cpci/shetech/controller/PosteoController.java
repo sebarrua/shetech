@@ -65,17 +65,19 @@ public class PosteoController {
 		model.addAttribute("ComentarioModel", comentarioModel);
 		if(principal!=null) {
 			Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
-			Puntuacion puntuacionThisPost = this.puntuacionService.getByPosteoAndUsuario(post, userLog);
-			if(puntuacionThisPost!=null) {
-				model.addAttribute("puntuacion", puntuacionThisPost.getValor());
+			Puntuacion puntuacionThisPostAndUserLog = this.puntuacionService.getByPosteoAndUsuario(post, userLog);
+			if(puntuacionThisPostAndUserLog!=null) {
+				model.addAttribute("puntuacion", puntuacionThisPostAndUserLog.getValor());
 			}else {
-				String sinPuntuar="sin_puntuar";
+				String sinPuntuar="Sin valorar";
 				model.addAttribute("puntuacion", sinPuntuar);
 			}
 		}else {
-			String sinPuntuar="sin_puntuar";
+			String sinPuntuar="Sin valorar";
 			model.addAttribute("puntuacion", sinPuntuar);
 		}
+		Long puntuacionTotalThisPost = this.puntuacionService.getPuntosTotalByPost(post);
+		model.addAttribute("puntosPost", puntuacionTotalThisPost);
 		comentarioModel.setTexto("");
 		this.vistaUtils.setHeader(principal, model);
 		return new ModelAndView(vista,  model);
@@ -132,15 +134,17 @@ public class PosteoController {
 	@GetMapping(value="/posteoAdmin")
 	public String PosteosAdmin(ModelMap model, Principal principal) {
 		String vista="posteosPageAdmin";
+		//Usuario usuario = this.usuarioService.getOneById((long) 3);
+		
+		/*======TODOS LOS POSTEOS========*/
 		List<Posteo> listPosteo = this.posteoService.getAll();
-		Usuario usuario = this.usuarioService.getOneById((long) 3);
-		List<Posteo> listPosteoByUsuario = this.posteoService.getPosteosByUsuario(usuario);
-		List<Posteo> listPosteoByUsuarioAprobados = this.posteoService.getPosteosByUsuarioAprobados(usuario);
-		System.out.println("listPosteoByUsuarioAprobados: "+listPosteoByUsuarioAprobados.size());
-		for(Posteo p: listPosteoByUsuarioAprobados) {
-			System.out.println(p.getPosteoId());
-		}
-		List<Posteo> listPosteoAprobados = this.posteoService.getPosteosAprobados();
+//		/*======POSTEOS APROBADOS========*/
+//		List<Posteo> listPosteoAprobados = this.posteoService.getPosteosAprobados();
+//		/*======POSTEOS POR USUARIO========*/
+//		List<Posteo> listPosteoByUsuario = this.posteoService.getPosteosByUsuario(usuario);
+//		/*======POSTEOS POR USUARIO Y APROBADOS========*/
+//		List<Posteo> listPosteoByUsuarioAprobados = this.posteoService.getPosteosByUsuarioAprobados(usuario);
+		
 		model.addAttribute("listPosteo", listPosteo);
 		this.vistaUtils.setHeader(principal, model);
 		return vista;
@@ -148,7 +152,7 @@ public class PosteoController {
 	
 	@GetMapping(value="/addPosteo")
 	public String AddPosteo(@ModelAttribute ("Posteo") Posteo posteo, ModelMap model, Principal principal) {
-		String vista="addPost.html";
+		String vista="addPost";
 		List<Empresa> listEmpresa = this.empresaService.getAll();
 		model.addAttribute("Posteo", posteo);
 		model.addAttribute("listaEmpresa", listEmpresa);
@@ -158,7 +162,7 @@ public class PosteoController {
 	
 	@PostMapping(value="/posteoSave")
 	public String PosteoSave(@ModelAttribute ("Posteo") Posteo posteo, Model model, Principal principal) {
-		String vista="redirect:/posteoAdmin";
+		String vista="redirect:/posteos";
 		String mensaje="";
 		Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
 		if(!posteo.getTitulo().equals("")) {

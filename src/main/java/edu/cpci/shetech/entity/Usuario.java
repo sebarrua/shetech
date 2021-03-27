@@ -2,6 +2,11 @@ package edu.cpci.shetech.entity;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
 @Entity
 @Table(name="usuario")
 public class Usuario {

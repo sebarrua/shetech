@@ -18,6 +18,15 @@ public class RolUsuarioService implements _BaseService<RolUsuario> {
 	@Autowired
 	private RolService rolService;
 	
+	public void setRolAdmin(Usuario usuario) {
+		RolUsuario newRolUsuario = new RolUsuario();
+		Rol rolUsuario = this.rolService.getOneById((long) 1);
+		newRolUsuario.setRol(rolUsuario);
+		newRolUsuario.setUsuario(usuario);
+		this.rolUsuarioRepository.save(newRolUsuario);
+		
+	}
+	
 	public void setRolUser(Usuario usuario) {
 		RolUsuario newRolUsuario = new RolUsuario();
 		Rol rolUsuario = this.rolService.getOneById((long) 2);
@@ -45,4 +54,6 @@ public class RolUsuarioService implements _BaseService<RolUsuario> {
 	public void delete(Long id) {
 		this.rolUsuarioRepository.deleteById(id);
 	}
+
+
 }

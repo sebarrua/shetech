@@ -18,6 +18,17 @@ public class EmpresaService implements _BaseService<Empresa> {
 	
 	@Autowired
 	private EmpresaRepository empresaRepository;
+	
+	public Empresa getByNombre(String empresaPost) {
+		Empresa empresaReturn = null;
+		List<Empresa> listEmpresa = this.getAll();
+		for(Empresa e: listEmpresa) {
+			if(e.getNombre().equals(empresaPost)) {
+				empresaReturn=e;
+			}
+		}
+		return empresaReturn;
+	}
 
 	@Override
 	public List<Empresa> getAll() {
@@ -32,7 +43,7 @@ public class EmpresaService implements _BaseService<Empresa> {
 
 	@Override
 	public void save(Empresa entidad) {
-		// TODO Auto-generated method stub
+		this.empresaRepository.save(entidad);
 		
 	}
 
@@ -41,5 +52,7 @@ public class EmpresaService implements _BaseService<Empresa> {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }

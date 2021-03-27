@@ -21,13 +21,21 @@ import edu.cpci.shetech.repository.UsuarioRepository;
 public class UsuarioService implements _BaseService<Usuario> {
 	
     @Autowired
-    private UsuarioRepository repositorioUsuario;
+    private UsuarioRepository usuarioRepository;
 	@Autowired
     private EntityManager entityManager;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private RolUsuarioService rolUsuarioService;
+	
+	public Iterable<Usuario> save(List<Usuario> listUsuarios) {
+        return usuarioRepository.saveAll(listUsuarios);
+    }
+    public Iterable<Usuario> list() {
+        return usuarioRepository.findAll();
+    }
+
 	
 	
 	/**
@@ -43,14 +51,31 @@ public class UsuarioService implements _BaseService<Usuario> {
 		newUser.setEmail(usuario.getEmail());
 		newUser.setActivo(true);
 		newUser.setPassword(passwordEncoder.encode(usuario.getPassword()));
-		this.repositorioUsuario.save(newUser);
-		this.rolUsuarioService.setRolUser(newUser);
+		this.usuarioRepository.save(newUser);
+		if(!newUser.getUsername().equals("admin")) {
+			this.rolUsuarioService.setRolUser(newUser);
+		}else {
+			this.rolUsuarioService.setRolAdmin(newUser);
+			this.rolUsuarioService.setRolUser(newUser);
+		}
 		mensaje="Usuario "+usuario.getUsername()+" agregado.";
 		return mensaje;
 		}catch(Exception e){
 			mensaje="Error al agregar usuario.";
 			return mensaje;
 		}
+	}
+	
+	public Usuario getusuarioByNombreObject(String nombre) {
+		Usuario usuarioReturn=null;
+		List<Usuario> listUsuario = this.getAll();
+		for(Usuario u: listUsuario) {
+			if(u.getUsername().equals(nombre)) {
+				usuarioReturn=u;
+				break;
+			}
+		}
+		return usuarioReturn;
 	}
     
 	/**
@@ -101,18 +126,18 @@ public class UsuarioService implements _BaseService<Usuario> {
 	@Override
 	public List<Usuario> getAll() {
 		// TODO Auto-generated method stub
-		return this.repositorioUsuario.findAll();
+		return this.usuarioRepository.findAll();
 	}
 
 	@Override
 	public Usuario getOneById(Long id) {
 		// TODO Auto-generated method stub
-		return this.repositorioUsuario.getOne(id);
+		return this.usuarioRepository.getOne(id);
 	}
 
 	@Override
 	public void save(Usuario entidad) {
-		this.repositorioUsuario.save(entidad);
+		this.usuarioRepository.save(entidad);
 		
 	}
 

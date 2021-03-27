@@ -26,6 +26,10 @@ public class ComentarioController {
 										ModelMap model, 
 										Principal principal) {
 		ModelAndView vista;
+		System.out.println("ComentarioController addComentario");
+		System.out.println("Usuario: "+comentarioModel.getUsername());
+		System.out.println("Post: "+comentarioModel.getPost());
+		System.out.println("Texto: "+comentarioModel.getTexto());
 		if(principal!=null) {
 			if(!comentarioModel.getTexto().equals("")) {
 				this.comentarioService.addComentario(comentarioModel);
@@ -34,7 +38,7 @@ public class ComentarioController {
 				model.addAttribute("mensajeComentar", unComent);
 			}
 		}else {
-			String unLogue ="Se requiere loguearce para comentar.";
+			String unLogue ="¡Lo sentimos! Requiere loguearce para comentar.";
 			model.addAttribute("mensajeComentar", unLogue);
 		}
 		vista=this.posteoController.Post(comentarioModel, comentarioModel.getPost(), model, principal);

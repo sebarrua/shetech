@@ -1,0 +1,34 @@
+[{"usuario":
+    {
+        "username":"admin",
+        "email":"admin@admin.com",
+        "password":"123",
+        "isActivo":true
+    }
+},
+{"usuario":
+    {
+        "username":"lupita",
+        "email":"lupita@lupita.com",
+        "password":"123",
+        "isActivo":true
+    }
+},
+{"usuario":
+    {
+        "username":"pepito",
+        "email":"pepito@pepito.com",
+        "password":"123",
+        "isActivo":true
+    }
+},
+{"usuario":
+    {
+        "username":"usuario",
+        "email":"usuario@usuario.com",
+        "password":"123",
+        "isActivo":true
+    }
+}
+]
+

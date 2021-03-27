@@ -12,10 +12,25 @@ import edu.cpci.shetech.repository.PuntuacionRepository;
 
 @Service
 public class PuntuacionService implements _BaseService<Puntuacion>{
-
+	
 	@Autowired
 	private PuntuacionRepository puntuacionRepository;
-	
+
+	public Long getPuntosTotalByPost(Posteo post) {
+		List<Puntuacion> listPuntuacionByPost = this.puntuacionRepository.getPuntuacionByPosteo(post);
+		Long puntuacionFinal=(long)0;
+		if(listPuntuacionByPost!=null) {
+			for(Puntuacion p: listPuntuacionByPost) {
+				if(p.getValor().equals("Positivo")) {
+					puntuacionFinal=puntuacionFinal+1;
+				}
+				if(p.getValor().equals("Negativo")) {
+					puntuacionFinal=puntuacionFinal-1;
+				}
+			}
+		}
+		return puntuacionFinal;
+	}
 	public void setPuntuacion(Usuario usuario, Posteo post, String valor) {
 		Puntuacion puntuacionByPosteo=(Puntuacion) this.puntuacionRepository.findByPosteoAndUsuario(post, usuario);
 		puntuacionByPosteo.setValor(valor);

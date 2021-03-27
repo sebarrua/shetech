@@ -1,0 +1,20 @@
+[
+{"parametro":
+    {
+        "tipoParametro":"ESTADO.POSTEO",
+        "descripcion":"POSTEO.REVISION"
+    }
+},
+{"parametro":
+    {
+        "tipoParametro":"ESTADO.POSTEO",
+        "descripcion":"POSTEO.APROBADO"
+    }
+},
+{"parametro":
+    {
+        "tipoParametro":"ESTADO.POSTEO",
+        "descripcion":"POSTEO.BLOQUEADO"
+    }
+}
+]

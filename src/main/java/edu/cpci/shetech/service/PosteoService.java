@@ -33,13 +33,13 @@ public class PosteoService implements _BaseService<Posteo> {
 	}
 	
 	public List<Posteo> getPosteosByUsuarioAprobados(Usuario usuario){
-		Parametro parametroPostAprobado = this.parametroService.getOneById((long) 2);
+		Parametro parametroPostAprobado = this.parametroService.getEstadoPostByDescripcion("POSTEO.APROBADO");
 		List<Posteo> listPosteosByUsuarioAprobados = this.posteoRepository.findByUsuarioAndEstado(usuario, parametroPostAprobado);
 		return listPosteosByUsuarioAprobados;
 	}
 	
 	public List<Posteo> getPosteosAprobados(){
-		Parametro parametroPostAprobado = this.parametroService.getOneById((long) 2);
+		Parametro parametroPostAprobado = this.parametroService.getEstadoPostByDescripcion("POSTEO.APROBADO");
 		List<Posteo> listPosteosAprobados = this.posteoRepository.getPosteosByEstado(parametroPostAprobado);
 		return listPosteosAprobados;
 	}
@@ -52,14 +52,14 @@ public class PosteoService implements _BaseService<Posteo> {
 	
 	public void bloquearPosteo(Long posteoId) {
 		Posteo posteoSelect = this.posteoRepository.getOne(posteoId);
-		Parametro posteoBloqueado = this.parametroService.getOneById((long) 3);
+		Parametro posteoBloqueado = this.parametroService.getEstadoPostByDescripcion("POSTEO.BLOQUEADO");
 		posteoSelect.setEstado(posteoBloqueado);	
 		this.posteoRepository.save(posteoSelect);
 	}
 	
 	public void aprobarPosteo(Long posteoId) {
 		Posteo posteoSelect = this.posteoRepository.getOne(posteoId);
-		Parametro posteoAprobado = this.parametroService.getOneById((long) 2);
+		Parametro posteoAprobado = this.parametroService.getEstadoPostByDescripcion("POSTEO.APROBADO");
 		posteoSelect.setEstado(posteoAprobado);	
 		this.posteoRepository.save(posteoSelect);
 	}
@@ -74,7 +74,7 @@ public class PosteoService implements _BaseService<Posteo> {
 		newPosteo.setFechaPosteo(date);
 		newPosteo.setEmpresa(posteo.getEmpresa());
 		newPosteo.setUsuario(usuario);
-		Parametro posteoEnRevision = this.parametroService.getOneById((long) 1);
+		Parametro posteoEnRevision = this.parametroService.getEstadoPostByDescripcion("POSTEO.REVISION");
 		newPosteo.setEstado(posteoEnRevision);
 		this.posteoRepository.save(newPosteo);
 		mensaje="Posteo agregado con exito";

@@ -40,7 +40,7 @@ public class PuntuacionController {
 									ModelMap model, 
 									Principal principal) {
 		ModelAndView vista;
-		String valor="positivo";
+		String valor="Positivo";
 		if(principal!=null) {
 			Posteo post = this.posteoService.getOneById(id);
 			Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
@@ -52,7 +52,7 @@ public class PuntuacionController {
 					this.puntuacionService.setPuntuacion(userLog, post, valor);
 				
 				}else {
-					valor="sin valorar";
+					valor="Sin valorar";
 					this.puntuacionService.setPuntuacion(userLog, post, valor);
 				}
 			}
@@ -72,7 +72,7 @@ public class PuntuacionController {
 										ModelMap model, 
 										Principal principal) {
 		ModelAndView vista;
-		String valor="negativo";
+		String valor="Negativo";
 		if(principal!=null) {
 			Posteo post = this.posteoService.getOneById(id);
 			Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
@@ -84,7 +84,7 @@ public class PuntuacionController {
 					this.puntuacionService.setPuntuacion(userLog, post, valor);
 				
 				}else {
-					valor="sin valorar";
+					valor="Sin valorar";
 					this.puntuacionService.setPuntuacion(userLog, post, valor);
 				}
 			}
