@@ -66,7 +66,7 @@ public class UsuarioService implements _BaseService<Usuario> {
             Query query = entityManager.createQuery(sql, Usuario.class);
 
             query.setParameter("nombre",nombre);
-            System.out.println("Nombre de usuario logueado: "+((Usuario) query.getSingleResult()).getUsername());
+            //System.out.println("Nombre de usuario logueado: "+((Usuario) query.getSingleResult()).getUsername());
 
             return (Usuario) query.getSingleResult();
         }catch (NoResultException e){

@@ -11,16 +11,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="comentario")
-public class Comentario {
+@Table(name="puntuacion")
+public class Puntuacion {
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id")
-	private Long comentarioId;
+	private Long puntuacionId;
 	
-	@Column(name="texto")
-	private String texto;
+	@Column(name="valor")
+	private String valor;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", nullable = false)
@@ -30,24 +31,16 @@ public class Comentario {
     @JoinColumn(name = "id_posteo", nullable = false)
 	private Posteo posteo;
 	
-	public Comentario() {
+	public Puntuacion() {
 		
 	}
 
-	public Long getComentarioId() {
-		return comentarioId;
+	public Long getPuntuacionId() {
+		return puntuacionId;
 	}
 
-	public void setComentarioId(Long comentarioId) {
-		this.comentarioId = comentarioId;
-	}
-
-	public String getTexto() {
-		return texto;
-	}
-
-	public void setTexto(String texto) {
-		this.texto = texto;
+	public void setPuntuacionId(Long puntuacionId) {
+		this.puntuacionId = puntuacionId;
 	}
 
 	public Usuario getUsuario() {
@@ -65,7 +58,14 @@ public class Comentario {
 	public void setPosteo(Posteo posteo) {
 		this.posteo = posteo;
 	}
-	
-	
 
+	public String getValor() {
+		return valor;
+	}
+
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
+	
+	
 }

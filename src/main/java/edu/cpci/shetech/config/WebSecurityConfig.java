@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         	.csrf().disable()
             .authorizeRequests()
             	.antMatchers( "/", "/homePage", "/register", "/posteo").permitAll()
-                .antMatchers("/addPosteo").hasAnyAuthority(ROLE_ADMIN, ROLE_USUARIO)
+                .antMatchers("/addPosteo", "/posteoSave").hasAnyAuthority(ROLE_ADMIN, ROLE_USUARIO)
                 .antMatchers(
                 		"/deletPosteo",
                 		"/posteoAdmin",

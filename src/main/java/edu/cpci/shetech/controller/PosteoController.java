@@ -6,20 +6,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import edu.cpci.shetech.ObjectModel.ComentarioModel;
+import edu.cpci.shetech.entity.Comentario;
 import edu.cpci.shetech.entity.Empresa;
 import edu.cpci.shetech.entity.Parametro;
 import edu.cpci.shetech.entity.Posteo;
+import edu.cpci.shetech.entity.Puntuacion;
 import edu.cpci.shetech.entity.Usuario;
 import edu.cpci.shetech.service.EmpresaService;
 import edu.cpci.shetech.service.ParametroService;
 import edu.cpci.shetech.service.PosteoService;
+import edu.cpci.shetech.service.PuntuacionService;
 import edu.cpci.shetech.service.UsuarioService;
 import edu.cpci.shetech.utils.VistaUtils;
 
@@ -37,10 +43,12 @@ public class PosteoController {
 	private VistaUtils vistaUtils;
 	@Autowired
 	private ParametroService parametroService;
+	@Autowired
+	private PuntuacionService puntuacionService;
 
 	
 	@GetMapping(value="/posteos")
-	public String Posteos(Model model, Principal principal) {
+	public String Posteos(ModelMap model, Principal principal) {
 		String vista="posts";
 		List<Posteo> listPosteo = this.posteoService.getPosteosAprobados();
 		model.addAttribute("listPosteo", listPosteo);
@@ -49,36 +57,41 @@ public class PosteoController {
 	}
 	
 	@GetMapping(value="/post")
-	public String Post(@RequestParam(value = "id") Long id, Model model, Principal principal) {
+	public ModelAndView Post(	@ModelAttribute ("ComentarioModel") ComentarioModel comentarioModel, 
+								@RequestParam(value = "id") Long id, ModelMap model, Principal principal) {
 		String vista="post";
 		Posteo post = this.posteoService.getOneById(id);
 		model.addAttribute("post", post);
-		/**
-		 * 
-		 * 
-		List<Posteo> listPosteo = this.posteoService.getAll();
-		for(Posteo post: listPosteo) {
-			if(post.getPosteoId() == id) {
-				model.addAttribute("post", post);
+		model.addAttribute("ComentarioModel", comentarioModel);
+		if(principal!=null) {
+			Usuario userLog = this.usuarioService.getUsuarioByNombre(principal.getName());
+			Puntuacion puntuacionThisPost = this.puntuacionService.getByPosteoAndUsuario(post, userLog);
+			if(puntuacionThisPost!=null) {
+				model.addAttribute("puntuacion", puntuacionThisPost.getValor());
+			}else {
+				String sinPuntuar="sin_puntuar";
+				model.addAttribute("puntuacion", sinPuntuar);
 			}
+		}else {
+			String sinPuntuar="sin_puntuar";
+			model.addAttribute("puntuacion", sinPuntuar);
 		}
-		 */
+		comentarioModel.setTexto("");
 		this.vistaUtils.setHeader(principal, model);
-		return vista;
+		return new ModelAndView(vista,  model);
+		//return vista;
 	}
 	
 	@PostMapping(value="/editPosteoSave")
 	public String EditPosteoSave(@ModelAttribute ("Posteo") Posteo posteo, Model model, Principal principal) {
-		
 		System.out.println("POSTEO CONTROLLER: editPosteoSave");
-		//Posteo posteoSelect = this.posteoService.getOneById(posteo.getPosteoId());
 		Posteo posteoSelect=this.posteoService.editSave(posteo);
 		String vista ="redirect:/editarPosteo/"+posteo.getPosteoId();
 		return vista;
 	}
 	
 	@GetMapping(value="/editarPosteo/{posteoId}")
-	public String EditarPosteo(@PathVariable ("posteoId") Long posteoId, Model model, Principal principal) {
+	public String EditarPosteo(@PathVariable ("posteoId") Long posteoId, ModelMap model, Principal principal) {
 		String vista="editPost";
 		System.out.println("VISTA POSTEO CONTROLLER");
 		Posteo posteoSelect=this.posteoService.getOneById(posteoId);
@@ -117,7 +130,7 @@ public class PosteoController {
 	
 	
 	@GetMapping(value="/posteoAdmin")
-	public String PosteosAdmin(Model model, Principal principal) {
+	public String PosteosAdmin(ModelMap model, Principal principal) {
 		String vista="posteosPageAdmin";
 		List<Posteo> listPosteo = this.posteoService.getAll();
 		Usuario usuario = this.usuarioService.getOneById((long) 3);
@@ -134,7 +147,7 @@ public class PosteoController {
 	}
 	
 	@GetMapping(value="/addPosteo")
-	public String AddPosteo(@ModelAttribute ("Posteo") Posteo posteo, Model model, Principal principal) {
+	public String AddPosteo(@ModelAttribute ("Posteo") Posteo posteo, ModelMap model, Principal principal) {
 		String vista="addPost.html";
 		List<Empresa> listEmpresa = this.empresaService.getAll();
 		model.addAttribute("Posteo", posteo);

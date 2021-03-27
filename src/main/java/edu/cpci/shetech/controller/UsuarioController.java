@@ -5,6 +5,7 @@ import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +37,7 @@ public class UsuarioController {
 	@PostMapping(value="/registerSave")
 	public String RegisterSave (@ModelAttribute ("Usuario") Usuario usuario, 
 								@RequestParam (name="passwordRepeat") String passwordRepeat,
-								Model model, Principal principal){
+								ModelMap model, Principal principal){
 		String vista="register";
 		String mensaje="";
 		System.out.println("Nombre: "+usuario.getUsername());
@@ -84,7 +85,7 @@ public class UsuarioController {
 	 * @return
 	 */
 	@RequestMapping(value="/register", method = RequestMethod.GET)
-	public String Register(@ModelAttribute ("Usuario") Usuario usuario, Model model, Principal principal) {
+	public String Register(@ModelAttribute ("Usuario") Usuario usuario, ModelMap model, Principal principal) {
 		String vista="register";
 		model.addAttribute("Usuario", usuario);
 		this.vistaUtils.setHeader(principal, model);
