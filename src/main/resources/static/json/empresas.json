@@ -1,27 +1,37 @@
 [
 {"empresa":
     {
-        "nombre":"Grido Helados"
+        "nombre":"Grido Helados",
+        "descripcion":"Descripcion de Grido Helados",
+        "direccion":"Av. Chacabuco 2569"
     }
 },
 {"empresa":
     {
-        "nombre":"MercadoLibre"
+        "nombre":"MercadoLibre",
+        "descripcion":"Descripcion de MercadoLibre",
+        "direccion":"Av. Centenario 1458"
     }
 },
 {"empresa":
     {
-        "nombre":"YPF"
+        "nombre":"YPF",
+        "descripcion":"Descripcion de YPF",
+        "direccion":"Av. Los Laureles 698"
     }
 },
 {"empresa":
     {
-        "nombre":"Consultora UnaConsultora"
+        "nombre":"Consultora UnaConsultora",
+        "descripcion":"Descripcion de Consultora UnaConsultora",
+        "direccion":"Ciudad de Dios..."
     }
 },
 {"empresa":
     {
-        "nombre":"Google"
+        "nombre":"Google",
+        "descripcion":"Descripcion de Google",
+        "direccion":"El Planeta Tierra"
     }
 }
 ]

@@ -156,6 +156,8 @@ public class PosteoController {
 		List<Empresa> listEmpresa = this.empresaService.getAll();
 		model.addAttribute("Posteo", posteo);
 		model.addAttribute("listaEmpresa", listEmpresa);
+		String addEmpresa="/addEmpresa";
+		model.addAttribute("addEmpresa", addEmpresa);
 		this.vistaUtils.setHeader(principal, model);
 		return vista;
 	}

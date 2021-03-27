@@ -29,9 +29,9 @@ public class EmpresaController {
 		return "listaEmpresasPage";
 	}
 	
-	@GetMapping(value="/newEmpresa")
+	@GetMapping(value="/addEmpresa")
 	public String NewEmpresa(Model model, Principal principal) {
-		String vista="newEmpresaPage";
+		String vista="addEmpresa";
 		//Empresa empresa = new Empresa();
 		//model.addAttribute("Empresa", empresa);
 		System.out.println("CONTROLADOR NEW EMPRESA");

@@ -14,7 +14,7 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <title>She Tech | Agregar Post</title>  
+        <title>She Tech | Agregar Empresa</title>  
     </head>
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="#" crossorigin="anonymous">
@@ -28,7 +28,7 @@
 		        <div class="card-body">
 		            <div class="row">
 		                <div class="col-md-3 border-right">
-		                    <h4>Agregar post</h4>
+		                    <h4>Agregar empresa</h4>
 		                </div>
 		            </div>
 		            <hr>
@@ -36,9 +36,9 @@
 		                <div class="col-md-8">
         		            <form th:action="@{/posteoSave}" th:object="${Posteo}" th:method="post"> 
                               <div class="form-group row">
-                                <label for="text" class="col-12 col-form-label">Titulo</label> 
+                                <label for="text" class="col-12 col-form-label">Nombre</label> 
                                 <div class="col-12">
-                                  <input th:field="*{titulo}" placeholder="Ingresa un titulo" class="form-control here" required="required" type="text">
+                                  <input th:field="*{nombre}" placeholder="Ingresa un nombre" class="form-control here" required="required" type="text">
                                 </div>
                               </div>
                               <div class="form-group row">
@@ -48,9 +48,9 @@
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <label for="textarea" class="col-12 col-form-label">Opinión</label> 
+                                <label for="textarea" class="col-12 col-form-label">Direccion</label> 
                                 <div class="col-12">
-                                  <textarea th:field="*{texto}" cols="40" rows="5" class="form-control"></textarea>
+                                    <input th:field="*{direccion}" placeholder="Ingresa una direccion" class="form-control here" required="required" type="text">
                                 </div>
                               </div>
                               <div class="form-group row">
