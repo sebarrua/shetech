@@ -38,7 +38,7 @@
         <h1 class="mt-4"  th:text="${post.getTitulo()}"></h1>
 		    <p class="lead" th:text="${post.getEmpresa().getNombre()}" ></p>
         <p class="lead"><a  th:text="${post.getUsuario().getUsername()}"></a></p>
-        <p  th:text="'Fecha de publicación: ' + ${post.getFechaPosteo()}"></p>
+        <p class="lead" th:text="'Fecha de publicación: ' + ${#dates.format(post.getFechaPosteo(), 'dd-MM-yyyy | HH:mm')}"></p>
         <hr>
         <h3 class="mt-4">Descripción::</h3>
         <p class="lead" th:text="${post.getDescripcion()}"></p>

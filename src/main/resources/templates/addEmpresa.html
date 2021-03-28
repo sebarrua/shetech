@@ -14,6 +14,14 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+        </script>
         <title>She Tech | Agregar Empresa</title>  
     </head>
 
@@ -22,6 +30,7 @@
 <th:block th:include="/_header"></th:block>
 
 <div class="container-fluid">
+    <input id="datepicker" width="276" value="02/04/2018" />
 	
 		<div class="col-md-9">
 		    <div class="card">
@@ -34,7 +43,7 @@
 		            <hr>
 		            <div class="row">
 		                <div class="col-md-8">
-        		            <form th:action="@{/posteoSave}" th:object="${Posteo}" th:method="post"> 
+        		            <form th:action="@{/empresaSave}" th:object="${Empresa}" th:method="post"> 
                               <div class="form-group row">
                                 <label for="text" class="col-12 col-form-label">Nombre</label> 
                                 <div class="col-12">
@@ -54,18 +63,14 @@
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <label for="textarea" class="col-12 col-form-label">Empresa</label> 
+                                <label for="textarea" class="col-12 col-form-label">Fecha fundacion</label> 
                                 <div class="col-12">
-                                    <select th:field="*{empresa}"id="textarea" name="textarea" cols="40" rows="5" class="form-control">
-                                        <option  value="" selected=true readonly>Selecciona una opción</option>
-                                        <option th:each="empresa: ${listaEmpresa}" 
-                                            th:text="${empresa.getNombre()}"
-                                            th:value="${empresa.getEmpresaId()}">
-                                        </option>
-                                    </select>
-                                    <a th:href="${addEmpresa}">Agregar empresa</a>
+                                    <input th:field="*{fechaFundacion}" placeholder="Ingresa una direccion" class="form-control here" required="required" type="text">
+                                    <input type='text' id="datepicker" width="276" value="02/04/2018" />
                                 </div>
                               </div>
+                              <input id="datepicker" width="276" value="08/12/2020" />
+                              
                               <div class="col-md-7">
                                 <button type="submit" class="btn btn-sm btn-primary">Agregar</button>
                             </div> 
@@ -104,7 +109,9 @@
 <script src="/js/all.js"></script>
 <script src="/js/custom.js"></script>
 <script src="/js/timeline.min.js"></script>
+
 <script>
+
     timeline(document.querySelectorAll('.timeline'), {
         forceVerticalMode: 700,
         mode: 'horizontal',

@@ -30,8 +30,9 @@ public class EmpresaController {
 	}
 	
 	@GetMapping(value="/addEmpresa")
-	public String NewEmpresa(Model model, Principal principal) {
+	public String NewEmpresa(@ModelAttribute ("Empresa") Empresa empresa, Model model, Principal principal) {
 		String vista="addEmpresa";
+		model.addAttribute("Empresa", empresa);
 		//Empresa empresa = new Empresa();
 		//model.addAttribute("Empresa", empresa);
 		System.out.println("CONTROLADOR NEW EMPRESA");

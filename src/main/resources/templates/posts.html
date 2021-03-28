@@ -38,7 +38,7 @@
             <p class="card-text"  th:text="${posteos.getDescripcion()}"></p>
             <a th:href="@{/post(id=${posteos.getPosteoId()})}" class="btn btn-primary">Leer mas &rarr;</a>
           </div>
-          <div class="card-footer text-muted" th:text="'Fecha de publicación: ' + ${posteos.getFechaPosteo()}">
+          <div class="card-footer text-muted" th:text="'Fecha de publicación: ' + ${#dates.format(posteos.getFechaPosteo(), 'dd-MM-yyyy | HH:mm')}">
             <a  th:text="${posteos.getUsuario().getUsername()}"></a>
           </div>
         </div>

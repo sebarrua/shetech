@@ -69,7 +69,7 @@ public class UsuarioController {
 			}
 			model.addAttribute("mensaje", mensaje);
 			this.vistaUtils.setHeader(principal, model);
-			return "redirect:/register";
+			return "redirect:/login";
 		}catch(Exception e){
 			this.vistaUtils.setHeader(principal, model);
 			return "/404";
